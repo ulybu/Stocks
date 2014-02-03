@@ -20,25 +20,21 @@ enyo.kind({
 	}, {
 		kind: "enyo.Scroller",
 		fit: true,
-		components: [{
-			name: "main",
-			kind: "enyo.DataRepeater",
-			collection: ".app.$.messages",
-			components: [{
-				classes: "nice-padding",
-				components: [{
-					tag: "span",
-					content: "Message: "
-				}, {
-					tag: "span",
-					name: "message",
-					classes: "nice-padding",
-				}],
-				bindings: [
-					{from: ".model.message", to: ".$.message.content"}
-				]
-			}]
-		}]
+		components: [
+			{
+				kind       : 'chert.d3.PieChart' ,
+				id         : 'd3bar' ,
+				name       : "pie",
+				yTitle     : "Stocks",
+				style      : "width : 450px; height: 300px;",
+				dataConfig : {
+					valuesAccessor      : function(d, i) {return d.values;},
+					yAccessor           : function(d, i) {return d.high;},
+					// xAccessor           : function(d, i) {return d.abc;},
+					datasetNameAccessor : function(d, i) {return d.name;}
+				}
+			}
+		]
 	}, {
 		kind: "onyx.Toolbar",
 		components: [{
@@ -53,8 +49,30 @@ enyo.kind({
 				placeholder: "Watch bindings work"
 			}]
 		}]
-	}],
-	addRecord: function(inSender, inEvent) {
-		this.doAddRecord();
-	}
+	}]
+});
+ enyo.kind({
+	name: "Bootplate.MainView",
+	kind: "FittableRows",
+	fit: true,
+	events: {
+		// sent from view to indicate "Add Record" button hit
+		onAddRecord: ""
+	},
+	components: [
+		{
+				kind       : 'chert.d3.PieChart' ,
+				id         : 'd3bar' ,
+				name       : "pie",
+				yTitle     : "Stocks",
+				style      : "width : 450px; height: 300px;",
+				dataConfig : {
+					valuesAccessor      : function(d, i) {return d.values;},
+					yAccessor           : function(d, i) {return d.high;},
+					// xAccessor           : function(d, i) {return d.abc;},
+					datasetNameAccessor : function(d, i) {return d.name;}
+				}
+			}
+	],
+
 });
