@@ -12,7 +12,7 @@ enyo.kind({
 		// 	this.get("sets").merge(data.dataset,true);
 		// }
 		// delete data.dataset;
-		return {symbol:data.symbol, name:data.Name,values:[{high:data.DaysHigh}]};
+		return {symbol:data.symbol, name:data.Name,values:[{high:data.LastTradePriceOnly}]};
 	}
 });
 enyo.kind({

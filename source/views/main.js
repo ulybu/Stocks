@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "Bootplate.MainView",
+	name: "Stocks.MainView",
 	kind: "FittableRows",
 	fit: true,
 	events: {
@@ -16,7 +16,8 @@ enyo.kind({
 	}],
 	components: [{
 		name: "toolbar",
-		kind: "onyx.Toolbar"
+		kind: "onyx.Toolbar",
+		content: "Stocks"
 	}, {
 		kind: "enyo.Scroller",
 		fit: true,
@@ -25,12 +26,12 @@ enyo.kind({
 				kind       : 'chert.d3.PieChart' ,
 				id         : 'd3bar' ,
 				name       : "pie",
-				yTitle     : "Stocks",
-				style      : "width : 450px; height: 300px;",
+				title      : "Bids in $",
+				legendAlignment : "center",
+				style      : "width : 480px; height: 300px;",
 				dataConfig : {
 					valuesAccessor      : function(d, i) {return d.values;},
 					yAccessor           : function(d, i) {return d.high;},
-					// xAccessor           : function(d, i) {return d.abc;},
 					datasetNameAccessor : function(d, i) {return d.name;}
 				}
 			}
@@ -49,30 +50,5 @@ enyo.kind({
 				placeholder: "Watch bindings work"
 			}]
 		}]
-	}]
-});
- enyo.kind({
-	name: "Bootplate.MainView",
-	kind: "FittableRows",
-	fit: true,
-	events: {
-		// sent from view to indicate "Add Record" button hit
-		onAddRecord: ""
-	},
-	components: [
-		{
-				kind       : 'chert.d3.PieChart' ,
-				id         : 'd3bar' ,
-				name       : "pie",
-				yTitle     : "Stocks",
-				style      : "width : 450px; height: 300px;",
-				dataConfig : {
-					valuesAccessor      : function(d, i) {return d.values;},
-					yAccessor           : function(d, i) {return d.high;},
-					// xAccessor           : function(d, i) {return d.abc;},
-					datasetNameAccessor : function(d, i) {return d.name;}
-				}
-			}
-	],
-
+	}],
 });

@@ -1,14 +1,13 @@
 enyo.kind({
-	name: "Bootplate.Application",
+	name: "Stocks.Application",
 	kind: "enyo.Application",
-	components: [{
-		name: "message",
-		kind: "Bootplate.MessageController"
-	}, {
-		name: "messages",
-		kind: "Bootplate.MessagesController"
-	}],
-	view: "Bootplate.MainView",
+	components: [
+		{
+			name: "stocks",
+			kind: "stocks"
+		}
+	],
+	view: "Stocks.MainView",
 	handlers: {
 		onAddRecord: "handleAddRecord"
 	},
@@ -19,14 +18,11 @@ enyo.kind({
 	create: enyo.inherit(function(sup) {
 		return function(){
 			sup.apply(this, arguments);
-			this.set("stockCollection",new stocks());
-			var that = this;
-			this.stockCollection.fetch({strategy: "merge",success:function(cc) {that.view.$.pie.set("data",that.stockCollection); }});
-			
-			// var t = this.stockCollection.raw();
-			// "AskRealtime": "36.77",
-                    // "BidRealtime": "35.50",
-                    //  "BookValue": "12.587",
+
+			this.$.stocks.fetch({strategy: "merge",success:enyo.bind(this,this.newDataArrived)});
 		};
 	}),
+	newDataArrived : function(rec, opts, res) {
+		this.view.$.pie.set("data",this.$.stocks);
+	},
 });
